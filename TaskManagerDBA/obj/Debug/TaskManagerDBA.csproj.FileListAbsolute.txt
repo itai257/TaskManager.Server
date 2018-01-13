@@ -1,0 +1,10 @@
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\bin\Debug\TaskManagerDBA.dll.config
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\bin\Debug\TaskManagerDBA.dll
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\bin\Debug\TaskManagerDBA.pdb
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\bin\Debug\EntityFramework.dll
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\bin\Debug\EntityFramework.xml
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\obj\Debug\TaskManagerDBA.dll
+c:\users\itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\obj\Debug\TaskManagerDBA.pdb
+C:\Users\Itay\documents\visual studio 2015\Projects\TaskManager.Server\TaskManagerDBA\obj\Debug\TaskManagerDBA.csprojResolveAssemblyReference.cache
