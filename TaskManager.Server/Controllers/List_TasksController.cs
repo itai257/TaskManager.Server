@@ -36,5 +36,20 @@ namespace TaskManager.Server.Controllers
                 return response;
             }
         }
+
+        public HttpResponseMessage Post(HttpRequestMessage request)
+        {
+            var json = request.Content.ReadAsStringAsync().Result;
+            var requestData = Newtonsoft.Json.JsonConvert.DeserializeObject<List_Tasks>(json);
+            using (TaskManagerEntities ent = new TaskManagerEntities())
+            {
+                var response = new HttpResponseMessage();
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new ObjectContent<List_Tasks>(requestData, new JsonMediaTypeFormatter());
+                //ent.List_Tasks.Add(requestData);
+                //ent.SaveChanges();
+                return response;
+            }
+        }
     }
 }
