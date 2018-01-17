@@ -6,6 +6,7 @@ using System.Web.Cors;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using System.Web.Http.Cors;
 
 namespace TaskManager.Server
 {
@@ -26,8 +27,10 @@ namespace TaskManager.Server
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            config.EnableCors();
+            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");
+            cors.SupportsCredentials = true;
             
+            config.EnableCors(cors);
         }
     }
 }

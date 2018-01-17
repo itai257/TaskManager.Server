@@ -14,6 +14,7 @@ namespace TaskManager.Server.Controllers
     public class ListController : ApiController
     {
         // get all lists
+
         public HttpResponseMessage Get()
         {
             using (TaskManagerEntities ent = new TaskManagerEntities())
@@ -24,6 +25,30 @@ namespace TaskManager.Server.Controllers
                 return response;
             }
         }
+
+        [Route("api/list/{listId}")]
+        public HttpResponseMessage Delete(int listId, HttpRequestMessage request)
+        {
+            using (TaskManagerEntities ent = new TaskManagerEntities())
+            {
+                var response = new HttpResponseMessage();
+                response.StatusCode = HttpStatusCode.OK;
+                List<List_Tasks> tasks = ent.List_Tasks.ToList();
+                foreach (var t in tasks)
+                {
+                    if (t.list_id == listId)
+                    {
+                        ent.List_Tasks.Remove(t);
+                        ent.SaveChanges();
+                    }
+                }
+                var list = ent.Lists.FirstOrDefault(e => e.id == listId);
+                ent.Lists.Remove(list);
+                ent.SaveChanges();
+                return response;
+            }
+        }
+
         //
         public HttpResponseMessage Get(int id)
         {
@@ -50,6 +75,7 @@ namespace TaskManager.Server.Controllers
                     return response;
             }
         }
+
 
 
     }

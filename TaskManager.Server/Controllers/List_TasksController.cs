@@ -46,10 +46,42 @@ namespace TaskManager.Server.Controllers
                 var response = new HttpResponseMessage();
                 response.StatusCode = HttpStatusCode.OK;
                 response.Content = new ObjectContent<List_Tasks>(requestData, new JsonMediaTypeFormatter());
-                //ent.List_Tasks.Add(requestData);
-                //ent.SaveChanges();
+                ent.List_Tasks.Add(requestData);
+                ent.SaveChanges();
                 return response;
             }
         }
+
+        public HttpResponseMessage Put(HttpRequestMessage request)
+        {
+            var json = request.Content.ReadAsStringAsync().Result;
+            var requestData = Newtonsoft.Json.JsonConvert.DeserializeObject<List_Tasks>(json);
+            using (TaskManagerEntities ent = new TaskManagerEntities())
+            {
+                var response = new HttpResponseMessage();
+                response.StatusCode = HttpStatusCode.OK;
+                var obj = ent.List_Tasks.FirstOrDefault(task => task.id == requestData.id);
+                ent.List_Tasks.Remove(obj);
+                ent.SaveChanges();
+                obj.status = "done";
+                ent.List_Tasks.Add(obj);
+                ent.SaveChanges();
+                return response;
+            }
+        }
+
+        public HttpResponseMessage Delete(int id)
+        {
+            using (TaskManagerEntities ent = new TaskManagerEntities())
+            {
+                var response = new HttpResponseMessage();
+                response.StatusCode = HttpStatusCode.OK;
+                var obj = ent.List_Tasks.FirstOrDefault(task => task.id == id);
+                ent.List_Tasks.Remove(obj);
+                ent.SaveChanges();
+                return response;
+            }
+        }
+
     }
 }
