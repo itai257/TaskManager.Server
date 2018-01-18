@@ -63,7 +63,13 @@ namespace TaskManager.Server.Controllers
                 var obj = ent.List_Tasks.FirstOrDefault(task => task.id == requestData.id);
                 ent.List_Tasks.Remove(obj);
                 ent.SaveChanges();
-                obj.status = "done";
+                if(obj.status == "open")
+                {
+                    obj.status = "doing";
+                }else if(obj.status == "doing")
+                {
+                    obj.status = "done";
+                }
                 ent.List_Tasks.Add(obj);
                 ent.SaveChanges();
                 return response;
