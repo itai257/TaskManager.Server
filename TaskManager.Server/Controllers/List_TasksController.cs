@@ -45,6 +45,14 @@ namespace TaskManager.Server.Controllers
             {
                 var response = new HttpResponseMessage();
                 response.StatusCode = HttpStatusCode.OK;
+                if (requestData.start_date != null)
+                {
+                    requestData.start_date = ((DateTime)requestData.start_date).AddDays(1);
+                }
+                if (requestData.end_date != null)
+                {
+                    requestData.end_date = ((DateTime)requestData.end_date).AddDays(1);
+                }
                 response.Content = new ObjectContent<List_Tasks>(requestData, new JsonMediaTypeFormatter());
                 ent.List_Tasks.Add(requestData);
                 ent.SaveChanges();
