@@ -72,14 +72,11 @@ namespace TaskManager.Server.Controllers
                 var response = new HttpResponseMessage();
                 response.StatusCode = HttpStatusCode.OK;
                 var obj = ent.Users.FirstOrDefault(user => user.id == requestData.id);
-                ent.Users.Remove(obj);
-                ent.SaveChanges();
                 obj.firstname = requestData.firstname;
                 obj.lastname = requestData.lastname;
                 if (requestData.password != null && requestData.password.Length > 0)
                     obj.password = requestData.password;
                 response.Content = new ObjectContent<User>(obj, new JsonMediaTypeFormatter());
-                ent.Users.Add(obj);
                 ent.SaveChanges();
                 return response;
             }

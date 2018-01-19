@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Net.Mail;
 using TaskManagerDBA;
 
 namespace TaskManager.Server.Controllers
@@ -95,8 +96,26 @@ namespace TaskManager.Server.Controllers
 
             }
         }
-
-
+        public HttpResponseMessage Put(HttpRequestMessage request)
+        {
+            var json = request.Content.ReadAsStringAsync().Result;
+            var requestData = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(json);
+            using (TaskManagerEntities ent = new TaskManagerEntities())
+            {
+                var response = new HttpResponseMessage();
+                response.StatusCode = HttpStatusCode.OK;
+                var obj = ent.Users.FirstOrDefault(user => user.email == requestData.email);
+                if(obj == null || obj.firstname != requestData.firstname || obj.lastname != requestData.lastname)
+                {
+                    response.StatusCode = HttpStatusCode.BadRequest;
+                    response.Content = new StringContent("Invalid details!");
+                    return response;
+                }
+                response.Content = new ObjectContent<User>(obj, new JsonMediaTypeFormatter());
+                return response;
+            }
         }
+
+    }
     }
 

@@ -69,8 +69,6 @@ namespace TaskManager.Server.Controllers
                 var response = new HttpResponseMessage();
                 response.StatusCode = HttpStatusCode.OK;
                 var obj = ent.List_Tasks.FirstOrDefault(task => task.id == requestData.id);
-                ent.List_Tasks.Remove(obj);
-                ent.SaveChanges();
                 if(obj.status == "open")
                 {
                     obj.status = "doing";
@@ -78,7 +76,6 @@ namespace TaskManager.Server.Controllers
                 {
                     obj.status = "done";
                 }
-                ent.List_Tasks.Add(obj);
                 ent.SaveChanges();
                 return response;
             }
